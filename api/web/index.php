@@ -12,8 +12,7 @@ $app->get('/getsurrounding/{x}/{y}', function ($x, $y) use ($app) {
 // default route
 $app->get('/', function () {
   return "List of avaiable methods:
-  - /getsurrounding/{x}/{y} - returns your surroundings;
-  - /countries/{id} - returns list of country's cities by id;";
+  - /getsurrounding/{x}/{y} - returns your surroundings;";
 });
 
 $app->run();
