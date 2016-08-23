@@ -5,7 +5,7 @@ require_once '../vendor/autoload.php';
 $app = new Silex\Application();
 
 // define route for /getsurrounding depending on x/y coordinates
-$app->get('/getsurrounding/{x}/{y}', function ($x, $y) {
+$app->get('/getsurrounding/{x}/{y}', function ($x, $y) use ($app) {
   return "get your surroundings for ${x} and ${y}";
 });
 
