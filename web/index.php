@@ -4,21 +4,15 @@ require_once '../vendor/autoload.php';
 // init Silex app
 $app = new Silex\Application();
 
-// define route for /countries
-$app->get('/countries', function () {
-  return "countries list";
+// define route for /getsurrounding depending on x/y coordinates
+$app->get('/getsurrounding/{x}/{y}', function ($x, $y) {
+  return "get your surroundings for ${x} and ${y}";
 });
-
-// define route for /countries/{id}
-$app->get('/countries/{id}', function ($id) {
-  return "country's cities list for id: $id";
-// id must be digital
-})->assert('id', '\d+');
 
 // default route
 $app->get('/', function () {
   return "List of avaiable methods:
-  - /countries - returns list of existing countries;
+  - /getsurrounding/{x}/{y} - returns your surroundings;
   - /countries/{id} - returns list of country's cities by id;";
 });
 
