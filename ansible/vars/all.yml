@@ -8,8 +8,9 @@ vagrant_local:
     vm: { base_box: trusty64, hostname: islandofthedead.com, ip: 192.168.33.111, memory: '2048', sharedfolder: ./, syncType: nfs }
 nginx:
     install: '1'
-    docroot: /vagrant
-    servername: islandofthedead
+    docroot: '/vagrant/api/web'
+    servername: 'islandofthedead.com www.islandofthedead.com'
+    hostname: 'islandofthedead.com'
 sqlite:
     install: '1'
 php:
