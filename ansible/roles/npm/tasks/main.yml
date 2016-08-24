@@ -1,0 +1,3 @@
+- name: (dev|test|accept) Install npm packages
+  sudo: false
+  command: npm install chdir="/vagrant/webapp"
