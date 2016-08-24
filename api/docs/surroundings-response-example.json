@@ -1,0 +1,21 @@
+[
+  {
+    "gameId": 1,
+    "fields": [
+      {
+        "id": 1,
+        "y-axis": 1,
+        "x-axis": 1,
+        "occupied": {
+          "type": "Human Player"
+        }
+      },
+      {
+        "id": 2,
+        "y-axis": 2,
+        "x-axis": 1,
+        "occupied": null
+      }
+    ]
+  }
+]
