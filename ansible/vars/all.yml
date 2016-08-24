@@ -1,0 +1,24 @@
+---
+server:
+    install: '1'
+    timezone: UTC
+    locale: en_US.UTF-8
+vagrant_local:
+    install: '1'
+    vm: { base_box: trusty64, hostname: islandofthedead.com, ip: 192.168.33.111, memory: '2048', sharedfolder: ./, syncType: nfs }
+nginx:
+    install: '1'
+    docroot: '/vagrant/api/web'
+    servername: 'islandofthedead.com www.islandofthedead.com'
+    hostname: 'islandofthedead.com'
+sqlite:
+    install: '1'
+php:
+    install: '1'
+    ppa: php5-5.6
+    packages: [php5-cli, php5-intl, php5-mcrypt, php5-sqlite]
+composer:
+    install: '1'
+application:
+  api:
+    root: /vagrant/api
