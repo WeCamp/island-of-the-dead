@@ -10,4 +10,6 @@
     - sqlite
     - php
     - composer
+    - nodejs
+    - npm
     - app

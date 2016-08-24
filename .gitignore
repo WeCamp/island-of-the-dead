@@ -1,3 +1,5 @@
 .vagrant
 api/vendor/
 .idea
+node_modules
+build
