@@ -6,4 +6,4 @@
   command: gulp
 - name: Run npm start to start server and serve files to outside world
   become: false
-  command: npm start
+  command: node /vagrant/webapp/server.js
