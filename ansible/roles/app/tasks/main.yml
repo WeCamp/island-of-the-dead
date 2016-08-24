@@ -1,9 +1,19 @@
 - name: Install project dependencies
   become: false
   command: composer install --prefer-dist --optimize-autoloader --no-interaction chdir="{{ application.api.root }}"
+
 - name: Run gulp to build files
   become: false
-  command: gulp
-- name: Run npm start to start server and serve files to outside world
-  become: false
-  command: npm start
+  command: chdir=/vagrant/webapp/node_modules/.bin gulp
+
+- name: "Install forever (to run Node.js app)."
+  npm: name=forever global=yes state=present
+
+- name: "Check list of Node.js apps running."
+  command: forever list
+  register: forever_list
+  changed_when: false
+
+- name: "Start Node.js app."
+  command: forever start /vagrant/webapp/server.js
+  when: "forever_list.stdout.find('/vagrant/webapp/server.js') == -1"
