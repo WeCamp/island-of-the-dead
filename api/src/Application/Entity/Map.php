@@ -27,10 +27,6 @@ class Map
         }
     }
 
-    public static function generate($width, $height, $numberOfZombies)
-    {
-    }
-
     /**
      * @return Field[]
      */
