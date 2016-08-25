@@ -2,6 +2,7 @@
 
 namespace Application\Controller;
 
+use Application\Entity\Field;
 use Application\Entity\Map;
 use Application\Entity\Player;
 use Symfony\Component\HttpFoundation\Request;
@@ -25,13 +26,13 @@ class PlayerController implements ControllerProviderInterface {
 
     public function get() {
 
-        $map = new Map(3,3);
-        $fields = $map->getSurroundingFields(2,2,1);
-        // add player to 2,2
+        $map = new Map(Field::X_MAX, Field::Y_MAX);
+        $fields = $map->getSurroundingFields(12, 12, 27);
+        // add player to 13, 13
         $player = new Player();
         foreach ($fields as &$field) {
-            if ($field->getXAxis() == 2
-                && $field->getYAxis() == 2
+            if ($field->getXAxis() == 13
+                && $field->getYAxis() == 14
             ) {
                 $field->setOccupant($player);
             }
@@ -42,16 +43,18 @@ class PlayerController implements ControllerProviderInterface {
             'fields' => []
         ];
 
-        foreach ($fields as $field) {
+        foreach ($fields as $fieldItem) {
             $occupantData = null;
-            if (!is_null($field->getOccupant())) {
+            if (!is_null($fieldItem->getOccupant())) {
                 $occupantData = [
-                    'type' => $field->getOccupant()->getType(),
+                    'type' => $fieldItem->getOccupant()->getType(),
                 ];
             }
             $result['fields'][] = [
-                'x-axis' => $field->getXAxis(),
-                'y-axis' => $field->getYAxis(),
+                'x-axis' => $fieldItem->getXAxis(),
+                'y-axis' => $fieldItem->getYAxis(),
+                'lat' => $fieldItem->getLatitude(),
+                'long' => $fieldItem->getLongitude(),
                 'occupant' => $occupantData,
             ];
         }
