@@ -13,6 +13,17 @@ var App = React.createClass({
 
     // yes, this is ugly :)
     var that = this;
+    var x;
+    var y;
+
+    navigator.geolocation.getCurrentPosition(function(position) {
+      lat = position.coords.latitude;
+      lon = position.coords.longitude;
+      that.setState({
+        x: lat,
+        y: lon,
+      });
+    });
 
     fetch('http://islandofthedead.com/surroundings')
     .then(function(response) {
@@ -70,7 +81,9 @@ var App = React.createClass({
     }
     return (
       <div>
-        {this.displayField()}
+        {this.displayField()} <br/>
+        Latitude: {this.state.x} <br/>
+        Longitude: {this.state.y}
       </div>
     );
   }
