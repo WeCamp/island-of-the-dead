@@ -3,6 +3,7 @@
 namespace spec\Application\Entity;
 
 use Application\Entity\Field;
+use Application\Interfaces\OccupantInterface;
 use PhpSpec\ObjectBehavior;
 use Prophecy\Argument;
 
@@ -31,5 +32,11 @@ class FieldSpec extends ObjectBehavior
     function it_has_no_occupant_at_first()
     {
         $this->getOccupant()->shouldReturn(null);
+    }
+
+    function it_should_set_an_occupant(OccupantInterface $occupant)
+    {
+        $this->setOccupant($occupant);
+        $this->getOccupant()->shouldReturn($occupant);
     }
 }
