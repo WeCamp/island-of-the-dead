@@ -67,6 +67,14 @@ class Field
     }
 
     /**
+     * @return bool
+     */
+    public function hasOccupant()
+    {
+        return !is_null($this->getOccupant());
+    }
+
+    /**
      * @param OccupantInterface $occupant
      */
     public function setOccupant($occupant)
