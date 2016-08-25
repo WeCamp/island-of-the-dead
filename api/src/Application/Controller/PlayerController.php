@@ -2,6 +2,7 @@
 
 namespace Application\Controller;
 
+use Application\Entity\Field;
 use Application\Entity\Map;
 use Application\Entity\Player;
 use Symfony\Component\HttpFoundation\Request;
@@ -25,17 +26,12 @@ class PlayerController implements ControllerProviderInterface {
 
     public function get() {
 
-        $map = new Map(3,3);
-        $fields = $map->getSurroundingFields(2,2,1);
-        // add player to 2,2
+        $map = new Map(Field::X_MAX, Field::Y_MAX);
+        $currentField = $map->getFieldByLatLon(52.3721542, 5.6340413);
+        $fields = $map->getSurroundingFields($currentField->getXAxis(), $currentField->getYAxis(), Field::X_MAX);
+        // add player to field
         $player = new Player();
-        foreach ($fields as &$field) {
-            if ($field->getXAxis() == 2
-                && $field->getYAxis() == 2
-            ) {
-                $field->setOccupant($player);
-            }
-        }
+        $currentField->setOccupant($player);
 
         $result = [
             'gameId' => 1,
@@ -52,6 +48,8 @@ class PlayerController implements ControllerProviderInterface {
             $result['fields'][] = [
                 'x-axis' => $field->getXAxis(),
                 'y-axis' => $field->getYAxis(),
+                'lat' => $field->getLatitude(),
+                'long' => $field->getLongitude(),
                 'occupant' => $occupantData,
             ];
         }

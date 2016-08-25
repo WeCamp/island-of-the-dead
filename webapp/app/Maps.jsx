@@ -16,8 +16,10 @@ export default class Maps extends React.Component {
            key: API_KEY,
            language: 'nl'
          }}
-        defaultCenter={this.props.center}
-        defaultZoom={this.props.zoom}>
+        center={this.props.center}
+        defaultCenter={this.props.defaultCenter}
+        defaultZoom={this.props.zoom}
+        >
       </GoogleMap>
     );
   }
@@ -25,5 +27,6 @@ export default class Maps extends React.Component {
 
 Maps.defaultProps = {
   center: {lat: 52.373486, lng: 5.637864},
+  defaultCenter: {lat: 52.373486, lng: 5.637864},
   zoom: 18,
 };

@@ -18,7 +18,11 @@ class Map
     {
         for ($x = 1; $x <= $xSize; $x++) {
             for ($y = 1; $y <= $ySize; $y++) {
-                $this->fields[] = new Field($x, $y);
+                $field = new Field($x, $y);
+                if (15 === $x && 7 === $y) {
+                    $field->setOccupant(new GameExit());
+                }
+                $this->fields[] = $field;
             }
         }
     }
@@ -53,5 +57,46 @@ class Map
             }
         }
         return $result;
+    }
+
+    /**
+     * @param double $lat
+     * @param double $lon
+     * @return Field
+     */
+    public function getFieldByLatLon($lat, $lon)
+    {
+        $latDiff = null;
+        $lonDiff = null;
+        $selectedField = null;
+        foreach ($this->getFields() as $field) {
+            if (is_null($latDiff)
+                && is_null($lonDiff)
+            ) {
+                $latDiff = $lat - $field->getLatitude();
+                $lonDiff = $lon - $field->getLongitude();
+                $selectedField = $field;
+                continue;
+            }
+            $currentLatDiff = $lat - $field->getLatitude();
+            $currentLonDiff = $lon - $field->getLongitude();
+            if (abs($currentLatDiff) <= abs($latDiff)
+                && abs($currentLonDiff) <= abs($lonDiff)
+            ) {
+                $latDiff = $currentLatDiff;
+                $lonDiff = $currentLonDiff;
+                $selectedField = $field;
+            }
+        }
+        return $selectedField;
+    }
+
+    /**
+     * @param array $coords
+     * @return string
+     */
+    public function movePlayer(array $coords)
+    {
+        return 'WON';
     }
 }
