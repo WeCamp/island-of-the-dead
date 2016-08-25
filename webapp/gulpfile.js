@@ -4,7 +4,7 @@ var reactify = require("reactify");
 var source = require("vinyl-source-stream");
 
 const config = {
-  styles_src: "app/style.css",
+  styles_src: "app/*.css",
   html_src: "app/index.html",
   destination_folder: "build",
   jsx_src: ["*.js", "app/**/*.js", "app/**/*.jsx"]

@@ -2,6 +2,7 @@
 
 use Application\Controller\PlayerController;
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpFoundation\Response;
 
 // default route
 $app->get('/', function () {
@@ -19,7 +20,7 @@ $app->get('/surroundings', function (Request $request) use ($app) {
         'long'   => $request->headers->get('long')
     ];
 
-    $response = [
+    $data = [
         'gameId' => 2,
         'fields' => [
             [
@@ -79,5 +80,9 @@ $app->get('/surroundings', function (Request $request) use ($app) {
     ];
 
 //    return $app->json($surrounding);
-    return $app->json($response);
+    return $app->json($data);
+});
+
+$app->after(function (Request $request, Response $response) {
+    $response->headers->set('Access-Control-Allow-Origin', '*');
 });
