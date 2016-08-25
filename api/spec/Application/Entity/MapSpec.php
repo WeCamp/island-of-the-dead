@@ -11,7 +11,7 @@ class MapSpec extends ObjectBehavior
 {
     function let()
     {
-        $this->beConstructedWith(20, 25);
+        $this->beConstructedWith(Field::X_MAX, Field::Y_MAX);
     }
 
     function it_is_initializable()
@@ -21,7 +21,7 @@ class MapSpec extends ObjectBehavior
 
     function it_has_500_fields()
     {
-        $this->getFields()->shouldHaveCount(20 * 25);
+        $this->getFields()->shouldHaveCount(Field::X_MAX * Field::Y_MAX);
         $this->getFields()[0]->shouldHaveType(Field::class);
     }
 
