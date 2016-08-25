@@ -18,7 +18,11 @@ class Map
     {
         for ($x = 1; $x <= $xSize; $x++) {
             for ($y = 1; $y <= $ySize; $y++) {
-                $this->fields[] = new Field($x, $y);
+                $field = new Field($x, $y);
+                if (15 === $x && 7 === $y) {
+                    $field->setOccupant(new GameExit());
+                }
+                $this->fields[] = $field;
             }
         }
     }
@@ -53,5 +57,14 @@ class Map
             }
         }
         return $result;
+    }
+
+    /**
+     * @param array $coords
+     * @return string
+     */
+    public function movePlayer(array $coords)
+    {
+        return 'WON';
     }
 }
