@@ -3,11 +3,11 @@
 
 ## FrontEnd Application (webapp) ##
 
-### Development mode ###
+### Development mode (local, prerequiste: install node.js) ###
 - Run `npm run dev` to start gulp which will build the project and start the watcher so changed files are being retranspiled to the build folder.
 - Run `npm run dev-server` to start nodemon and run server.js in development mode, so every change made to the sourcecode will result in a restart of the server.
 
-### Production mode ###
+### Production mode (vagrant box) ###
 - Run `npm run build` or `gulp` to start gulp, build the project and copy it to the build folder.
 - Run `npm start` to start server.js which will expose the contents of the build folder.
 
