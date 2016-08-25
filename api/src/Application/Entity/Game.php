@@ -17,6 +17,11 @@ class Game
     private $map;
 
     /**
+     * @var string
+     */
+    private $state;
+
+    /**
      * @param int $id
      * @param int $xSize
      * @param int $ySize
@@ -29,6 +34,7 @@ class Game
 
         $this->id  = $id;
         $this->map = new Map($xSize, $ySize);
+        $this->state = "STARTED";
     }
 
     /**
@@ -45,5 +51,13 @@ class Game
     public function getMap()
     {
         return $this->map;
+    }
+
+    /**
+     * @param array $coords
+     */
+    public function movePlayer(array $coords)
+    {
+        $this->state = $this->map->movePlayer($coords);
     }
 }

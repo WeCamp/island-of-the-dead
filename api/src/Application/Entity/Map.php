@@ -23,6 +23,10 @@ class Map
         }
     }
 
+    public static function generate($width, $height, $numberOfZombies)
+    {
+    }
+
     /**
      * @return Field[]
      */
@@ -53,5 +57,14 @@ class Map
             }
         }
         return $result;
+    }
+
+    /**
+     * @param array $coords
+     * @return string
+     */
+    public function movePlayer(array $coords)
+    {
+        return 'WON';
     }
 }
