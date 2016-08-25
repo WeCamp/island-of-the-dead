@@ -1,8 +1,17 @@
-# Surroundings JSON Examples
+# Game start JSON Examples
 
-- Example request:[surroundings-request-example.json](surroundings-request-example.json)
-- Example response:[surroundings-response-example.json](surroundings-response-example.json)
+- Example request:[game-start-request-example.json](game-start-request-example.json)
+- Example response:[game-start-response-example.json](game-start-response-example.json)
 
 ### URL
 
-- /surroundings (POST request)
+- /game/start
+
+# Game get JSON Examples
+
+- Example response:[game-get-response-example.json](game-start-response-example.json)
+
+### URL
+
+- /game/{gameId}
+

@@ -54,6 +54,14 @@ class Game
     }
 
     /**
+     * @return string
+     */
+    public function getState()
+    {
+        return $this->state;
+    }
+
+    /**
      * @param array $coords
      */
     public function movePlayer(array $coords)

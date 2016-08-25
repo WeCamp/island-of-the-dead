@@ -91,4 +91,22 @@ class Field
         $lonOffset = self::LON_MIN;
         return round($xDiff / $xSize * $lonSize + $lonOffset, 6);
     }
+
+    public function toArray()
+    {
+        $occupantData = null;
+        if (!is_null($this->getOccupant())) {
+            $occupantData = [
+                'type' => $this->getOccupant()->getType(),
+            ];
+        }
+
+        return [
+            'x-axis' => $this->getXAxis(),
+            'y-axis' => $this->getYAxis(),
+            'lat' => $this->getLatitude(),
+            'long' => $this->getLongitude(),
+            'occupant' => $occupantData,
+        ];
+    }
 }
