@@ -1,6 +1,7 @@
 var React = require("react");
 var Col = require('react-bootstrap').Col;
 var Row = require('react-bootstrap').Row;
+var Maps = require('./Maps.jsx');
 
 var App = React.createClass({
   getInitialState: function() {
@@ -25,52 +26,12 @@ var App = React.createClass({
       });
     });
   },
-  displayCol: function(i) {
-    var content = this.state.data.fields[i];
-    var contentInColumn = null;
-    if (content.occupied !== null) {
-      contentInColumn = content.occupied.type;
-    }
-    return (
-      <Col xs={4} md={4}>{contentInColumn}</Col>
-    );
-  },
-  displayField: function() {
-    console.log("displayField");
-    return (
-      <div>
-        <Row>
-          {this.displayCol(0)}
-          {this.displayCol(1)}
-          {this.displayCol(2)}
 
-        </Row>
-        <Row>
-          {this.displayCol(3)}
-          {this.displayCol(4)}
-          {this.displayCol(5)}
-        </Row>
-        <Row>
-          {this.displayCol(6)}
-          {this.displayCol(7)}
-          {this.displayCol(8)}
-        </Row>
-      </div>
-    );
-
-  },
   render: function() {
     console.log("rendering component");
-    if (!this.state.data) {
-      return (
-        <div>
-          No data found
-        </div>
-      );
-    }
     return (
       <div>
-        {this.displayField()}
+        <Maps />
       </div>
     );
   }
