@@ -2,6 +2,8 @@
 
 namespace Application\Entity;
 
+use Application\Interfaces\OccupantInterface;
+
 class Field
 {
     /**
@@ -13,6 +15,11 @@ class Field
      * @var int
      */
     protected $yAxis;
+
+    /**
+     * @var OccupantInterface
+     */
+    protected $occupant;
 
     /**
      * Field constructor. Create a field with the given x and y location
@@ -41,8 +48,19 @@ class Field
         return $this->yAxis;
     }
 
+    /**
+     * @return OccupantInterface
+     */
     public function getOccupant()
     {
-        // TODO: write logic here
+        return $this->occupant;
+    }
+
+    /**
+     * @param OccupantInterface $occupant
+     */
+    public function setOccupant($occupant)
+    {
+        $this->occupant = $occupant;
     }
 }
