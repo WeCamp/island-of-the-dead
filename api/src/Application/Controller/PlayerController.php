@@ -27,34 +27,29 @@ class PlayerController implements ControllerProviderInterface {
     public function get() {
 
         $map = new Map(Field::X_MAX, Field::Y_MAX);
-        $fields = $map->getSurroundingFields(12, 12, 27);
-        // add player to 13, 13
+        $currentField = $map->getFieldByLatLon(52.3721542, 5.6340413);
+        $fields = $map->getSurroundingFields($currentField->getXAxis(), $currentField->getYAxis(), Field::X_MAX);
+        // add player to field
         $player = new Player();
-        foreach ($fields as &$field) {
-            if ($field->getXAxis() == 13
-                && $field->getYAxis() == 14
-            ) {
-                $field->setOccupant($player);
-            }
-        }
+        $currentField->setOccupant($player);
 
         $result = [
             'gameId' => 1,
             'fields' => []
         ];
 
-        foreach ($fields as $fieldItem) {
+        foreach ($fields as $field) {
             $occupantData = null;
-            if (!is_null($fieldItem->getOccupant())) {
+            if (!is_null($field->getOccupant())) {
                 $occupantData = [
-                    'type' => $fieldItem->getOccupant()->getType(),
+                    'type' => $field->getOccupant()->getType(),
                 ];
             }
             $result['fields'][] = [
-                'x-axis' => $fieldItem->getXAxis(),
-                'y-axis' => $fieldItem->getYAxis(),
-                'lat' => $fieldItem->getLatitude(),
-                'long' => $fieldItem->getLongitude(),
+                'x-axis' => $field->getXAxis(),
+                'y-axis' => $field->getYAxis(),
+                'lat' => $field->getLatitude(),
+                'long' => $field->getLongitude(),
                 'occupant' => $occupantData,
             ];
         }
