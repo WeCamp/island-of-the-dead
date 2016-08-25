@@ -1,4 +1,6 @@
 var React = require("react");
+var Col = require('react-bootstrap').Col;
+var Row = require('react-bootstrap').Row;
 
 var App = React.createClass({
   getInitialState: function() {
@@ -34,8 +36,21 @@ var App = React.createClass({
     }
     return (
       <div>
-        {this.state.data.gameId}
-        First React Item hooray yay yay
+        <Row>
+          <Col md={4}>GameId: {this.state.data.gameId}</Col>
+          <Col md={4}>GameId: {this.state.data.gameId}</Col>
+          <Col md={4}>GameId: {this.state.data.gameId}</Col>
+        </Row>
+        <Row>
+          <Col md={4}>GameId: {this.state.data.gameId}</Col>
+          <Col md={4}>GameId: {this.state.data.gameId}</Col>
+          <Col md={4}>GameId: {this.state.data.gameId}</Col>
+        </Row>
+        <Row>
+          <Col md={4}>GameId: {this.state.data.gameId}</Col>
+          <Col md={4}>GameId: {this.state.data.gameId}</Col>
+          <Col md={4}>GameId: {this.state.data.gameId}</Col>
+        </Row>
       </div>
     );
   }
