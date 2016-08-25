@@ -1,15 +1,13 @@
-var React = require("react");
-var Col = require('react-bootstrap').Col;
-var Row = require('react-bootstrap').Row;
-var Maps = require('./Maps.jsx');
+import React from "react";
+import Col from 'react-bootstrap';
+import Row from 'react-bootstrap';
+import Maps from './Maps.jsx';
 
-var App = React.createClass({
-  getInitialState: function() {
-    return {
-      data: null,
-    };
-  },
-  componentDidMount: function() {
+export default class App extends React.Component {
+  constructor(props) {
+    super(props);
+  }
+  componentDidMount() {
     console.log("componentDidMount");
 
     // yes, this is ugly :)
@@ -25,17 +23,13 @@ var App = React.createClass({
         data: data
       });
     });
-  },
-
-  render: function() {
+  }
+  render() {
     console.log("rendering component");
     return (
-      <div>
+      <div className="maps-component">
         <Maps />
       </div>
     );
   }
-});
-
-
-module.exports = App;
+};

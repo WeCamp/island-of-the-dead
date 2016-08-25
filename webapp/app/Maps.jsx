@@ -1,22 +1,29 @@
-var React = require("react");
-var GoogleMap = require("google-map-react");
+import React from 'react';
 
-var Maps = React.createClass({
-  getDefaultProps: function() {
-   return {
-     center: {lat: 52.373486, lng: 5.637864},
-     zoom: 9
-    };
-  },
+import GoogleMap from 'google-map-react';
+const API_KEY = 'AIzaSyC2CY6tmBR88gS6cw_v6hf7JM2CSKz6ZgA';
+
+export default class Maps extends React.Component {
+  constructor(props) {
+    super(props);
+  }
+
   render() {
+
     return (
        <GoogleMap
+         bootstrapURLKeys={{
+           key: API_KEY,
+           language: 'nl'
+         }}
         defaultCenter={this.props.center}
         defaultZoom={this.props.zoom}>
       </GoogleMap>
     );
   }
-});
+}
 
-
-module.exports = Maps;
+Maps.defaultProps = {
+  center: {lat: 52.373486, lng: 5.637864},
+  zoom: 15,
+};

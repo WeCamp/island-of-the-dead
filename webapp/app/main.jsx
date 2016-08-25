@@ -1,9 +1,9 @@
-var React = require("react");
-var ReactDOM = require("react-dom");
-var App = require("./App.jsx");
+import React from "react";
+import ReactDOM from "react-dom";
+import App from "./App.jsx";
 
 function render(){
-    ReactDOM.render(<App />, document.getElementById("app"));
+  ReactDOM.render(<App />, document.getElementById("app"));
 }
 
 render();
