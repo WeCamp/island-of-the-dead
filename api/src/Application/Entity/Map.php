@@ -101,9 +101,28 @@ class Map
      * @param array $coords
      * @return string
      */
-    public function movePlayer(array $coords)
+    public function movePlayer($latitude, $longitude)
     {
-        return 'WON';
+        $player = null;
+        // remove player from old location
+        foreach ($this->getFields() as $field) {
+            if ($field->getOccupant() instanceof Player) {
+                $player = $field->getOccupant();
+                $field->setOccupant(null);
+                break;
+            }
+        }
+        $newField = $this->getFieldByLatLon($latitude, $longitude);
+        if (!$newField->hasOccupant()) {
+            $newField->setOccupant($player);
+            return Game::STATE_ACTIVE;
+        }
+        if ($newField->getOccupant() instanceof GameExit) {
+            return Game::STATE_WON;
+        }
+        if ($newField->getOccupant() instanceof Zombie) {
+            return Game::STATE_LOST;
+        }
     }
 
     private function placeOccupants()
