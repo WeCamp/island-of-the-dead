@@ -18,6 +18,7 @@ class PlayerController implements ControllerProviderInterface {
         self::$app = $app;
         $factory=$app['controllers_factory'];
         $factory->get('/','Application\Controller\PlayerController::get');
+        $factory->get('/surroundings','Application\Controller\PlayerController::get');
         return $factory;
     }
 
