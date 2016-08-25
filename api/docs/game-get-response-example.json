@@ -1,0 +1,20 @@
+{
+  "gameId": 1,
+  "state": "STARTED",
+  "occupants": [
+    {
+      "x-axis": 14,
+      "y-axis": 16,
+      "latitude": 52.371914,
+      "longitude": 5.634037,
+      "type": "Human Player"
+    },
+    {
+      "x-axis": 15,
+      "y-axis": 7,
+      "latitude": 52.372662,
+      "longitude": 5.634179,
+      "type": "Exit"
+    }
+  ]
+}

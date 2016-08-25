@@ -5,33 +5,27 @@ namespace Application\Controller;
 use Application\Entity\Field;
 use Application\Entity\Map;
 use Application\Entity\Player;
+use Application\Repository\GameRepository;
 use Symfony\Component\HttpFoundation\Request;
 use Silex\Application;
 use Silex\ControllerProviderInterface;
 
-class PlayerController implements ControllerProviderInterface {
-
-    /**
-     * @var Application
-     */
-    protected static $app;
-
+class PlayerController implements ControllerProviderInterface
+{
     public function connect(Application $app) {
-        self::$app = $app;
         $factory=$app['controllers_factory'];
-        $factory->get('/','Application\Controller\PlayerController::get');
-        $factory->get('/surroundings','Application\Controller\PlayerController::get');
+        $factory->get('/{gameId}','Application\Controller\PlayerController::get');
         return $factory;
     }
 
-    public function get() {
+    public function get(Application $app, $gameId = 1)
+    {
+        /** @var GameRepository $gameRepo */
+        $gameRepo = $app['game_repository'];
+        $game = $gameRepo->find($gameId);
+        $map = $game->getMap();
 
-        $map = new Map(Field::X_MAX, Field::Y_MAX);
-        $currentField = $map->getFieldByLatLon(52.3721542, 5.6340413);
-        $fields = $map->getSurroundingFields($currentField->getXAxis(), $currentField->getYAxis(), Field::X_MAX);
-        // add player to field
-        $player = new Player();
-        $currentField->setOccupant($player);
+        $fields = $map->getSurroundingFields(1, 1, Field::X_MAX);
 
         $result = [
             'gameId' => 1,
@@ -39,22 +33,10 @@ class PlayerController implements ControllerProviderInterface {
         ];
 
         foreach ($fields as $field) {
-            $occupantData = null;
-            if (!is_null($field->getOccupant())) {
-                $occupantData = [
-                    'type' => $field->getOccupant()->getType(),
-                ];
-            }
-            $result['fields'][] = [
-                'x-axis' => $field->getXAxis(),
-                'y-axis' => $field->getYAxis(),
-                'lat' => $field->getLatitude(),
-                'long' => $field->getLongitude(),
-                'occupant' => $occupantData,
-            ];
+            $result['fields'][] = $field->toArray();
         }
 
-        return self::$app->json($result);
+        return $app->json($result);
     }
 
 }
