@@ -25,6 +25,40 @@ var App = React.createClass({
       });
     });
   },
+  displayCol: function(i) {
+    var content = this.state.data.fields[i];
+    var contentInColumn = null;
+    if (content.occupied !== null) {
+      contentInColumn = content.occupied.type;
+    }
+    return (
+      <Col xs={4} md={4}>{contentInColumn}</Col>
+    );
+  },
+  displayField: function() {
+    console.log("displayField");
+    return (
+      <div>
+        <Row>
+          {this.displayCol(0)}
+          {this.displayCol(1)}
+          {this.displayCol(2)}
+
+        </Row>
+        <Row>
+          {this.displayCol(3)}
+          {this.displayCol(4)}
+          {this.displayCol(5)}
+        </Row>
+        <Row>
+          {this.displayCol(6)}
+          {this.displayCol(7)}
+          {this.displayCol(8)}
+        </Row>
+      </div>
+    );
+
+  },
   render: function() {
     console.log("rendering component");
     if (!this.state.data) {
@@ -36,21 +70,7 @@ var App = React.createClass({
     }
     return (
       <div>
-        <Row>
-          <Col md={4}>GameId: {this.state.data.gameId}</Col>
-          <Col md={4}>GameId: {this.state.data.gameId}</Col>
-          <Col md={4}>GameId: {this.state.data.gameId}</Col>
-        </Row>
-        <Row>
-          <Col md={4}>GameId: {this.state.data.gameId}</Col>
-          <Col md={4}>GameId: {this.state.data.gameId}</Col>
-          <Col md={4}>GameId: {this.state.data.gameId}</Col>
-        </Row>
-        <Row>
-          <Col md={4}>GameId: {this.state.data.gameId}</Col>
-          <Col md={4}>GameId: {this.state.data.gameId}</Col>
-          <Col md={4}>GameId: {this.state.data.gameId}</Col>
-        </Row>
+        {this.displayField()}
       </div>
     );
   }
