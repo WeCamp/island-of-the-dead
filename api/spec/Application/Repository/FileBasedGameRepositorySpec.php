@@ -35,4 +35,9 @@ class FileBasedGameRepositorySpec extends ObjectBehavior
 
         $this->find(1)->shouldBeLike($game);
     }
+
+    function it_cannot_find_a_game_if_it_does_not_exist()
+    {
+        $this->shouldThrow('\InvalidArgumentException')->during('find', [1]);
+    }
 }

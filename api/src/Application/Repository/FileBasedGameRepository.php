@@ -41,7 +41,12 @@ class FileBasedGameRepository implements GameRepository
     public function find($id)
     {
         $filename = $this->getFilename($id);
-        $content  = file_get_contents($filename);
+
+        if (!file_exists($filename)) {
+            throw new \InvalidArgumentException(sprintf('Game with id %d has not been started yet.', $id));
+        }
+
+        $content = file_get_contents($filename);
 
         return unserialize($content);
     }
