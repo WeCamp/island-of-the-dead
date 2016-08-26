@@ -24,7 +24,7 @@ export default class Game extends React.Component {
   componentDidMount() {
     console.log("componentDidMount");
     this.startGame();
-    this.getGeoLocationAndUpdateMap();
+    // this.getGeoLocationAndUpdateMap();
   }
   startGame() {
     var formData = new FormData();
@@ -38,12 +38,10 @@ export default class Game extends React.Component {
         return response.json();
       })
       .then((jsonResponse) => {
-        this.setState({
-          gameId: jsonResponse.gameId,
-        });
+        this.getGeoLocationAndUpdateMap(jsonResponse.gameId);
       })
   }
-  getGeoLocationAndUpdateMap() {
+  getGeoLocationAndUpdateMap(gameId) {
     var lat;
     var lon;
 
@@ -58,13 +56,14 @@ export default class Game extends React.Component {
       var myInit = { method: 'POST',
                body: formData };
 
-      fetch(`${API_URL}/player/move/${this.state.gameId}`, myInit)
+      fetch(`${API_URL}/player/move/${gameId}`, myInit)
         .then(function(response) {
           console.log("fetching data from backend");
           return response.json();
         })
         .then((jsonResponse) => {
           this.setState({
+            gameId: gameId,
             status: jsonResponse.state,
             latitude: lat,
             longitude: lon,
@@ -72,7 +71,7 @@ export default class Game extends React.Component {
           });
         }).then(() => {
           this.timeout = setTimeout(() => {
-            this.getGeoLocationAndUpdateMap();
+            this.getGeoLocationAndUpdateMap(gameId);
           }, 5000);
         });
     });
