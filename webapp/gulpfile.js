@@ -8,7 +8,9 @@ const config = {
   styles_src: "app/*.css",
   html_src: "app/index.html",
   destination_folder: "build",
-  jsx_src: ["*.js", "app/**/*.js", "app/**/*.jsx"]
+  jsx_src: ["*.js", "app/**/*.js", "app/**/*.jsx"],
+  images_gif: "app/*.gif",
+  images_png: "app/*.png"
 }
 gulp.task("bundle", function () {
     return browserify({
@@ -21,7 +23,7 @@ gulp.task("bundle", function () {
 });
 
 gulp.task("copy", ["bundle"], function () {
-    return gulp.src([config.html_src, config.styles_src])
+    return gulp.src([config.html_src, config.styles_src, config.images_gif, config.images_png])
         .pipe(gulp.dest(config.destination_folder));
 });
 
