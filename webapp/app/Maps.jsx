@@ -6,29 +6,23 @@ const API_KEY = 'AIzaSyC2CY6tmBR88gS6cw_v6hf7JM2CSKz6ZgA';
 export default class Maps extends React.Component {
   constructor(props) {
     super(props);
-    this.state = {
-      objects: new Array(),
+  }
+  renderNonHumanObjects(object, index) {
+    if (object.type !== 'Human Player') {
+      return (
+        <Occupant key={index} lat={object.latitude} lng={object.longitude} type={object.type} />
+      );
     }
   }
-  componentWillReceiveProps(nextProps) {
-    console.log("Maps Component - componentWillReceiveProps, gameId:", nextProps.gameId, "location:", nextProps.location);
-    var that = this;
-    fetch(`http://islandofthedead.com/game/${nextProps.gameId}`)
-    .then(function(response) {
-      return response.json();
-    })
-    .then(function(jsonResponse) {
-      that.setState({
-        objects: jsonResponse.occupants
-      });
-    });
-  }
-  renderObject(object) {
+  renderPlayer(index) {
     return (
-      <Occupant lat={object.latitude} lng={object.longitude} type={object.type} />
-    );
+      <Occupant key='player' lat={this.props.location.lat} lng={this.props.location.lng} type='Human Player' />
+    )
   }
   render() {
+    const mapOptions = {
+      // mapTypeId: 'SATELLITE'
+    }
     return (
        <GoogleMap
          bootstrapURLKeys={{
@@ -36,10 +30,10 @@ export default class Maps extends React.Component {
            language: 'nl'
          }}
         center={this.props.location}
-        defaultCenter={this.props.defaultCenter}
-        defaultZoom={this.props.zoom}>
-
-        {this.state.objects.map(this.renderObject)}
+        defaultZoom={this.props.zoom}
+        options={mapOptions}>
+        {this.renderPlayer()}
+        {this.props.objects.map(this.renderNonHumanObjects)}
 
       </GoogleMap>
     );
@@ -47,8 +41,7 @@ export default class Maps extends React.Component {
 }
 
 Maps.defaultProps = {
-  gameId: null,
+  objects: null,
   location: {lat: 52.373486, lng: 5.637864},
-  defaultCenter: {lat: 52.373486, lng: 5.637864},
-  zoom: 18,
+  zoom: 19,
 };
