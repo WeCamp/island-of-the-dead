@@ -2,6 +2,7 @@ var gulp = require("gulp");
 var browserify = require("browserify");
 var reactify = require("reactify");
 var source = require("vinyl-source-stream");
+var babilify = require("babelify");
 
 const config = {
   styles_src: "app/*.css",
@@ -13,7 +14,7 @@ gulp.task("bundle", function () {
     return browserify({
         entries: "./app/main.jsx",
         debug: true
-    }).transform(reactify)
+    }).transform("babelify", {presets: ["es2015", "react"]})
         .bundle()
         .pipe(source("main.js"))
         .pipe(gulp.dest("build"))

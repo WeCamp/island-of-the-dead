@@ -1,27 +1,32 @@
-var React = require("react");
-var Col = require('react-bootstrap').Col;
-var Row = require('react-bootstrap').Row;
+import React from "react";
+import Col from 'react-bootstrap';
+import Row from 'react-bootstrap';
+import Maps from './Maps.jsx';
 
-var App = React.createClass({
-  getInitialState: function() {
-    return {
+export default class App extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {
       data: null,
-    };
-  },
-  componentDidMount: function() {
+      latitude: 52.373486,
+      longitude: 5.637864,
+    }
+  }
+  componentDidMount() {
     console.log("componentDidMount");
 
     // yes, this is ugly :)
     var that = this;
-    var x;
-    var y;
+    var lat;
+    var lon;
 
     navigator.geolocation.getCurrentPosition(function(position) {
       lat = position.coords.latitude;
       lon = position.coords.longitude;
+      console.log(lat,lon);
       that.setState({
-        x: lat,
-        y: lon,
+        latitude: lat,
+        longitude: lon,
       });
     });
 
@@ -35,59 +40,14 @@ var App = React.createClass({
         data: data
       });
     });
-  },
-  displayCol: function(i) {
-    var content = this.state.data.fields[i];
-    var contentInColumn = null;
-    if (content.occupied !== null) {
-      contentInColumn = content.occupied.type;
-    }
-    return (
-      <Col xs={4} md={4}>{contentInColumn}</Col>
-    );
-  },
-  displayField: function() {
-    console.log("displayField");
-    return (
-      <div>
-        <Row>
-          {this.displayCol(0)}
-          {this.displayCol(1)}
-          {this.displayCol(2)}
-
-        </Row>
-        <Row>
-          {this.displayCol(3)}
-          {this.displayCol(4)}
-          {this.displayCol(5)}
-        </Row>
-        <Row>
-          {this.displayCol(6)}
-          {this.displayCol(7)}
-          {this.displayCol(8)}
-        </Row>
-      </div>
-    );
-
-  },
-  render: function() {
+  }
+  render() {
+    const coordinates = {lat: this.state.latitude, lng: this.state.longitude}
     console.log("rendering component");
-    if (!this.state.data) {
-      return (
-        <div>
-          No data found
-        </div>
-      );
-    }
     return (
-      <div>
-        {this.displayField()} <br/>
-        Latitude: {this.state.x} <br/>
-        Longitude: {this.state.y}
+      <div className="maps-component">
+        <Maps center={coordinates}/>
       </div>
     );
   }
-});
-
-
-module.exports = App;
+};
