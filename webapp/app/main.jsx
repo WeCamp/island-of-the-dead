@@ -1,9 +1,9 @@
 import React from "react";
 import ReactDOM from "react-dom";
-import Game from "./Game.jsx";
+import App from "./App.jsx";
 
 function render(){
-  ReactDOM.render(<Game />, document.getElementById("app"));
+  ReactDOM.render(<App />, document.getElementById("app"));
 }
 
 render();

@@ -84,21 +84,21 @@ export default class Game extends React.Component {
     {this.displayStateInConsole()}
     if (this.state.status === null) {
       return(
-        <div>
+        <div className="game-loading">
           Game Loading ...
         </div>
       );
     }
     if (this.state.status === 'LOST') {
       return (
-        <div>
+        <div className="game-lost">
           Game Lost ...
         </div>
       );
     }
     if (this.state.status === 'WON') {
       return (
-        <div>
+        <div className="game-won">
           Game Won ...
         </div>
       );
