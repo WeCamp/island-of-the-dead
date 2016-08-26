@@ -8,7 +8,7 @@ export default class Occupant extends React.Component {
     // });
     return (
        <div key={this.props.lat} className={this.props.type}>
-          {this.props.type}
+         
        </div>
     );
   }
