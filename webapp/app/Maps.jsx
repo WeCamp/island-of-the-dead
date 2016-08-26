@@ -6,10 +6,24 @@ const API_KEY = 'AIzaSyC2CY6tmBR88gS6cw_v6hf7JM2CSKz6ZgA';
 export default class Maps extends React.Component {
   constructor(props) {
     super(props);
+    this.state = {
+      data: null,
+    }
   }
+  // componentDidUpdate() {
+  //   fetch('http://islandofthedead.com/surroundings')
+  //   .then(function(response) {
+  //     return response.json();
+  //   })
+  //   .then(function(jsonResponse) {
+  //     var data = jsonResponse;
+  //     that.setState({
+  //       data: data
+  //     });
+  //   });
+  // }
 
   render() {
-
     return (
        <GoogleMap
          bootstrapURLKeys={{

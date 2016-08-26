@@ -7,9 +7,10 @@ export default class App extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      data: null,
-      latitude: 52.373486,
-      longitude: 5.637864,
+      latitude: null,
+      longitude: null,
+      state: null,
+      gameId: null,
     }
   }
   componentDidMount() {
@@ -23,30 +24,39 @@ export default class App extends React.Component {
     navigator.geolocation.getCurrentPosition(function(position) {
       lat = position.coords.latitude;
       lon = position.coords.longitude;
-      console.log(lat,lon);
-      that.setState({
-        latitude: lat,
-        longitude: lon,
-      });
+
+      var formData = new FormData();
+      formData.set("latitude", lat);
+      formData.set("longitude", lon);
+
+      var myInit = { method: 'POST',
+               body: formData };
+
+      fetch('http://islandofthedead.com/game/start', myInit)
+        .then(function(response) {
+          return response.json();
+        })
+        .then(function(jsonResponse) {
+          that.setState({
+            state: jsonResponse.state,
+            gameId: jsonResponse.gameId,
+            latitude: lat,
+            longitude: lon,
+          });
+        });
     });
 
-    fetch('http://islandofthedead.com/surroundings')
-    .then(function(response) {
-      return response.json();
-    })
-    .then(function(jsonResponse) {
-      var data = jsonResponse;
-      that.setState({
-        data: data
-      });
-    });
+  }
+
+  componentWillUpdate() {
+
   }
   render() {
+    console.log(this.state.state, this.state.gameId, this.state.latitude, this.state.longitude);
     const coordinates = {lat: this.state.latitude, lng: this.state.longitude}
     console.log("rendering component");
     return (
       <div className="maps-component">
-        <Maps center={coordinates}/>
       </div>
     );
   }
