@@ -16,7 +16,7 @@ export default class Game extends React.Component {
     this.timeout;
   }
   displayStateInConsole() {
-    console.log("gameState:", this.state.status, "gameId:", this.state.gameId, "latitude:", this.state.latitude, "longitude:", this.state.longitude);
+    console.log("gameState:", this.state.status, "gameId:", this.state.gameId, "latitude:", this.state.latitude, "longitude:", this.state.longitude, "objectsInGame", this.state.objectsInGame);
   }
   componentDidMount() {
     console.log("componentDidMount");
@@ -79,6 +79,7 @@ export default class Game extends React.Component {
   }
 
   render() {
+    {this.displayStateInConsole()}
     if (this.state.status === null) {
       return(
         <div>
