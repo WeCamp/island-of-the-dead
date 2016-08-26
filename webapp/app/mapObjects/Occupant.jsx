@@ -7,8 +7,8 @@ export default class Occupant extends React.Component {
     //   [`${this.props.type}`]: true,
     // });
     return (
-       <div key={this.props.lat} className={this.props.type}>
-         
+       <div key={this.props.index} className={this.props.type}>
+
        </div>
     );
   }

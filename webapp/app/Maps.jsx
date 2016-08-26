@@ -7,16 +7,16 @@ export default class Maps extends React.Component {
   constructor(props) {
     super(props);
   }
-  renderNonHumanObjects(object) {
+  renderNonHumanObjects(object, index) {
     if (object.type !== 'Human Player') {
       return (
-        <Occupant lat={object.latitude} lng={object.longitude} type={object.type} />
+        <Occupant key={index} lat={object.latitude} lng={object.longitude} type={object.type} />
       );
     }
   }
-  renderPlayer() {
+  renderPlayer(index) {
     return (
-      <Occupant lat={this.props.location.lat} lng={this.props.location.lng} type='Human Player' />
+      <Occupant key='player' lat={this.props.location.lat} lng={this.props.location.lng} type='Human Player' />
     )
   }
   render() {
