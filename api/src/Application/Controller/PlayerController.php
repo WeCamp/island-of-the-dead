@@ -24,7 +24,19 @@ class PlayerController implements ControllerProviderInterface
         $longitude = $request->get('longitude');
         $game->movePlayer($latitude, $longitude);
         $gameRepo->save($game);
-        return $app->redirect('/game/' . $game->getId());
+
+        foreach ($game->getMap()->getFields() as $field) {
+            if ($field->getOccupant()) {
+                $result['occupants'][] = [
+                    'x-axis' => $field->getXAxis(),
+                    'y-axis' => $field->getYAxis(),
+                    'latitude' => $field->getLatitude(),
+                    'longitude' => $field->getLongitude(),
+                    'type' => $field->getOccupant()->getType(),
+                ];
+            }
+        }
+        return $app->json($result);
     }
 
 }
