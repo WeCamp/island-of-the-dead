@@ -15,7 +15,7 @@ class PlayerController implements ControllerProviderInterface
         return $factory;
     }
 
-    public function move(Application $app, Request $request, $gameId)
+    public static function move(Application $app, Request $request, $gameId)
     {
         /** @var GameRepository $gameRepo */
         $gameRepo = $app['game_repository'];
@@ -25,18 +25,7 @@ class PlayerController implements ControllerProviderInterface
         $game->movePlayer($latitude, $longitude);
         $gameRepo->save($game);
 
-        foreach ($game->getMap()->getFields() as $field) {
-            if ($field->getOccupant()) {
-                $result['occupants'][] = [
-                    'x-axis' => $field->getXAxis(),
-                    'y-axis' => $field->getYAxis(),
-                    'latitude' => $field->getLatitude(),
-                    'longitude' => $field->getLongitude(),
-                    'type' => $field->getOccupant()->getType(),
-                ];
-            }
-        }
-        return $app->json($result);
+        return GameController::get($app, $gameId);
     }
 
 }
