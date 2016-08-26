@@ -3,7 +3,7 @@ import Col from 'react-bootstrap';
 import Row from 'react-bootstrap';
 import Maps from './Maps.jsx';
 
-export default class App extends React.Component {
+export default class Game extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -12,6 +12,9 @@ export default class App extends React.Component {
       state: null,
       gameId: null,
     }
+  }
+  displayStateInConsole() {
+    console.log("gameState:", this.state.state, "gameId:", this.state.gameId, "latitude:", this.state.latitude, "longitude:", this.state.longitude);
   }
   componentDidMount() {
     console.log("componentDidMount");
@@ -52,11 +55,12 @@ export default class App extends React.Component {
 
   }
   render() {
-    console.log(this.state.state, this.state.gameId, this.state.latitude, this.state.longitude);
+    {this.displayStateInConsole()}
     const coordinates = {lat: this.state.latitude, lng: this.state.longitude}
     console.log("rendering component");
     return (
       <div className="maps-component">
+        <Maps center={coordinates} gameId={this.state.gameId} />
       </div>
     );
   }

@@ -10,27 +10,30 @@ export default class Maps extends React.Component {
       data: null,
     }
   }
-  // componentDidUpdate() {
-  //   fetch('http://islandofthedead.com/surroundings')
-  //   .then(function(response) {
-  //     return response.json();
-  //   })
-  //   .then(function(jsonResponse) {
-  //     var data = jsonResponse;
-  //     that.setState({
-  //       data: data
-  //     });
-  //   });
-  // }
+  componentWillReceiveProps(nextProps) {
+    console.log("Maps Component - componentWillReceiveProps, gameId:", nextProps.gameId, "location:", nextProps.location);
+    var that = this;
+    fetch(`http://islandofthedead.com/game/${nextProps.gameId}`)
+    .then(function(response) {
+      return response.json();
+    })
+    .then(function(jsonResponse) {
+      var data = jsonResponse;
+      that.setState({
+        data: data
+      });
+    });
+  }
 
   render() {
+    console.log("gameID", this.props.gameId);
     return (
        <GoogleMap
          bootstrapURLKeys={{
            key: API_KEY,
            language: 'nl'
          }}
-        center={this.props.center}
+        center={this.props.location}
         defaultCenter={this.props.defaultCenter}
         defaultZoom={this.props.zoom}
         >
@@ -40,7 +43,8 @@ export default class Maps extends React.Component {
 }
 
 Maps.defaultProps = {
-  center: {lat: 52.373486, lng: 5.637864},
+  gameId: null,
+  location: {lat: 52.373486, lng: 5.637864},
   defaultCenter: {lat: 52.373486, lng: 5.637864},
   zoom: 18,
 };
