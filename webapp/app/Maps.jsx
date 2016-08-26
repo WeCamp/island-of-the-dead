@@ -7,16 +7,19 @@ export default class Maps extends React.Component {
   constructor(props) {
     super(props);
   }
-  renderObject(object) {
-    return (
-      <Occupant lat={object.latitude} lng={object.longitude} type={object.type} />
-    );
+  renderNonHumanObjects(object) {
+    if (object.type !== 'Human Player') {
+      return (
+        <Occupant lat={object.latitude} lng={object.longitude} type={object.type} />
+      );
+    }
   }
-  componentWillReceiveProps(nextProps) {
-    console.log("nextProps", nextProps);
+  renderPlayer() {
+    return (
+      <Occupant lat={this.props.location.lat} lng={this.props.location.lng} type='Human Player' />
+    )
   }
   render() {
-    console.log("Maps", this.props.location);
     return (
        <GoogleMap
          bootstrapURLKeys={{
@@ -25,8 +28,8 @@ export default class Maps extends React.Component {
          }}
         center={this.props.location}
         defaultZoom={this.props.zoom}>
-
-        {this.props.objects.map(this.renderObject)}
+        {this.renderPlayer()}
+        {this.props.objects.map(this.renderNonHumanObjects)}
 
       </GoogleMap>
     );
@@ -35,7 +38,6 @@ export default class Maps extends React.Component {
 
 Maps.defaultProps = {
   objects: null,
-  gameId: null,
   location: {lat: 52.373486, lng: 5.637864},
-  zoom: 18,
+  zoom: 19,
 };

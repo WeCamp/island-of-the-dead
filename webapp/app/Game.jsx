@@ -79,8 +79,6 @@ export default class Game extends React.Component {
   }
 
   render() {
-    console.log("rendering component");
-    {this.displayStateInConsole()}
     if (this.state.status === null) {
       return(
         <div>
@@ -90,10 +88,9 @@ export default class Game extends React.Component {
     }
 
     const coordinates = {lat: this.state.latitude, lng: this.state.longitude}
-    console.log("coord",coordinates);
     return (
       <div className="maps-component">
-        <Maps center={coordinates} gameId={this.state.gameId} objects={this.state.objectsInGame} />
+        <Maps location={coordinates} gameId={this.state.gameId} objects={this.state.objectsInGame} />
       </div>
     );
   }
