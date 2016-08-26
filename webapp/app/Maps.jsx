@@ -38,8 +38,8 @@ export default class Maps extends React.Component {
         center={this.props.location}
         defaultCenter={this.props.defaultCenter}
         defaultZoom={this.props.zoom}>
-        {this.state.objects.map(this.renderObject)}
 
+        {this.state.objects.map(this.renderObject)}
 
       </GoogleMap>
     );
