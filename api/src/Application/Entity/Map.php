@@ -2,12 +2,17 @@
 
 namespace Application\Entity;
 
+use Application\Interfaces\OccupantInterface;
+
 class Map
 {
     /**
      * @var Field[]
      */
     protected $fields = [];
+
+    /** @var array */
+    private $occupants =[];
 
     /**
      * Map constructor. Create a rectangle with fields of the given size.
@@ -16,11 +21,12 @@ class Map
      */
     public function __construct($xSize, $ySize)
     {
+        $this->placeOccupants();
         for ($x = 1; $x <= $xSize; $x++) {
             for ($y = 1; $y <= $ySize; $y++) {
                 $field = new Field($x, $y);
-                if (15 === $x && 7 === $y) {
-                    $field->setOccupant(new GameExit());
+                if ($this->hasOccupant($x, $y)) {
+                    $field->setOccupant($this->getOccupant($x, $y));
                 }
                 $this->fields[] = $field;
             }
@@ -95,8 +101,73 @@ class Map
      * @param array $coords
      * @return string
      */
-    public function movePlayer(array $coords)
+    public function movePlayer($latitude, $longitude)
     {
-        return 'WON';
+        $player = null;
+        // remove player from old location
+        foreach ($this->getFields() as $field) {
+            if ($field->getOccupant() instanceof Player) {
+                $player = $field->getOccupant();
+                $field->setOccupant(null);
+                break;
+            }
+        }
+        $newField = $this->getFieldByLatLon($latitude, $longitude);
+        if (!$newField->hasOccupant()) {
+            $newField->setOccupant($player);
+            return Game::STATE_ACTIVE;
+        }
+        if ($newField->getOccupant() instanceof GameExit) {
+            return Game::STATE_WON;
+        }
+        if ($newField->getOccupant() instanceof Zombie) {
+            return Game::STATE_LOST;
+        }
+    }
+
+    private function placeOccupants()
+    {
+        $this->addOccupant(15, 7, new GameExit());
+        $this->addOccupant(15, 9, new Zombie());
+        $this->addOccupant(6, 17, new Zombie());
+        $this->addOccupant(6, 18, new Zombie());
+        $this->addOccupant(6, 19, new Zombie());
+        $this->addOccupant(7, 17, new Zombie());
+        $this->addOccupant(7, 18, new Zombie());
+        $this->addOccupant(7, 19, new Zombie());
+        $this->addOccupant(12, 11, new Zombie());
+        $this->addOccupant(10, 13, new Zombie());
+        $this->addOccupant(9, 15, new Zombie());
+        $this->addOccupant(14, 16, new Zombie());
+    }
+
+    /**
+     * @param int $x
+     * @param int $y
+     * @param OccupantInterface $occupant
+     */
+    private function addOccupant($x, $y, $occupant)
+    {
+        $this->occupants[$x][$y] = $occupant;
+    }
+
+    /**
+     * @param int $x
+     * @param int $y
+     * @return OccupantInterface
+     */
+    private function getOccupant($x, $y)
+    {
+        return $this->occupants[$x][$y];
+    }
+
+    /**
+     * @param int $x
+     * @param int $y
+     * @return bool
+     */
+    private function hasOccupant($x, $y)
+    {
+        return isset($this->occupants[$x][$y]);
     }
 }

@@ -6,6 +6,11 @@ use Assert\Assertion;
 
 class Game
 {
+    const STATE_STARTED = 'STARTED';
+    const STATE_WON = 'WON';
+    const STATE_LOST = 'LOST';
+    const STATE_ACTIVE = 'ACTIVE';
+
     /**
      * @var int
      */
@@ -34,7 +39,7 @@ class Game
 
         $this->id  = $id;
         $this->map = new Map($xSize, $ySize);
-        $this->state = "STARTED";
+        $this->state = self::STATE_STARTED;
     }
 
     /**
@@ -54,10 +59,19 @@ class Game
     }
 
     /**
-     * @param array $coords
+     * @return string
      */
-    public function movePlayer(array $coords)
+    public function getState()
     {
-        $this->state = $this->map->movePlayer($coords);
+        return $this->state;
+    }
+
+    /**
+     * @param double $latitude
+     * @param double $longitude
+     */
+    public function movePlayer($latitude, $longitude)
+    {
+        $this->state = $this->map->movePlayer($latitude, $longitude);
     }
 }
