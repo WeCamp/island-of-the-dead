@@ -15,7 +15,7 @@ class PlayerController implements ControllerProviderInterface
         return $factory;
     }
 
-    public function move(Application $app, Request $request, $gameId)
+    public static function move(Application $app, Request $request, $gameId)
     {
         /** @var GameRepository $gameRepo */
         $gameRepo = $app['game_repository'];
@@ -24,7 +24,8 @@ class PlayerController implements ControllerProviderInterface
         $longitude = $request->get('longitude');
         $game->movePlayer($latitude, $longitude);
         $gameRepo->save($game);
-        return $app->redirect('/game/' . $game->getId());
+
+        return GameController::get($app, $gameId);
     }
 
 }
