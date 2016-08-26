@@ -1,5 +1,5 @@
 import React from 'react';
-
+import Zombie from './mapObjects/Zombie.jsx';
 import GoogleMap from 'google-map-react';
 const API_KEY = 'AIzaSyC2CY6tmBR88gS6cw_v6hf7JM2CSKz6ZgA';
 
@@ -7,7 +7,7 @@ export default class Maps extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      data: null,
+      objects: new Array(),
     }
   }
   componentWillReceiveProps(nextProps) {
@@ -18,15 +18,17 @@ export default class Maps extends React.Component {
       return response.json();
     })
     .then(function(jsonResponse) {
-      var data = jsonResponse;
       that.setState({
-        data: data
+        objects: jsonResponse.occupants
       });
     });
   }
-
+  renderObject(object) {
+    return (
+      <Zombie lat={object.latitude} lng={object.longitude} text={"zombie"} />
+    );
+  }
   render() {
-    console.log("gameID", this.props.gameId);
     return (
        <GoogleMap
          bootstrapURLKeys={{
@@ -35,8 +37,10 @@ export default class Maps extends React.Component {
          }}
         center={this.props.location}
         defaultCenter={this.props.defaultCenter}
-        defaultZoom={this.props.zoom}
-        >
+        defaultZoom={this.props.zoom}>
+        {this.state.objects.map(this.renderObject)}
+
+
       </GoogleMap>
     );
   }
