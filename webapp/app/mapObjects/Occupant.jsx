@@ -1,13 +1,13 @@
 import React from 'react';
-import classnames from 'classnames';
+// import classnames from 'classnames';
 
 export default class Occupant extends React.Component {
   render() {
-    const cn = classnames({
-      [`${this.props.type}`]: true,
-    });
+    // const cn = classnames({
+    //   [`${this.props.type}`]: true,
+    // });
     return (
-       <div key={this.props.lat} className={cn}>
+       <div key={this.props.lat} className={this.props.type}>
           {this.props.type}
        </div>
     );
