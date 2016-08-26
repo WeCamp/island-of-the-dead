@@ -1,10 +1,10 @@
 import React from 'react';
 
-export default class Zombie extends React.Component {
+export default class Occupant extends React.Component {
   render() {
     return (
        <div key={this.props.lat} style={greatPlaceStyle}>
-          {this.props.text}
+          {this.props.type}
        </div>
     );
   }

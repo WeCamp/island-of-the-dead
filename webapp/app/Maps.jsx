@@ -1,5 +1,5 @@
 import React from 'react';
-import Zombie from './mapObjects/Zombie.jsx';
+import Occupant from './mapObjects/Occupant.jsx';
 import GoogleMap from 'google-map-react';
 const API_KEY = 'AIzaSyC2CY6tmBR88gS6cw_v6hf7JM2CSKz6ZgA';
 
@@ -25,7 +25,7 @@ export default class Maps extends React.Component {
   }
   renderObject(object) {
     return (
-      <Zombie lat={object.latitude} lng={object.longitude} text={"zombie"} />
+      <Occupant lat={object.latitude} lng={object.longitude} type={object.type} />
     );
   }
   render() {
