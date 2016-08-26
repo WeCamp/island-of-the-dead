@@ -73,5 +73,6 @@ class Game
     public function movePlayer($latitude, $longitude)
     {
         $this->state = $this->map->movePlayer($latitude, $longitude);
+        $this->state = $this->map->moveZombies();
     }
 }

@@ -13,6 +13,14 @@ class Map
 
     /** @var array */
     private $occupants =[];
+    /**
+     * @var int
+     */
+    private $xSize;
+    /**
+     * @var int
+     */
+    private $ySize;
 
     /**
      * Map constructor. Create a rectangle with fields of the given size.
@@ -31,6 +39,8 @@ class Map
                 $this->fields[] = $field;
             }
         }
+        $this->xSize = $xSize;
+        $this->ySize = $ySize;
     }
 
     /**
@@ -98,7 +108,8 @@ class Map
     }
 
     /**
-     * @param array $coords
+     * @param $latitude
+     * @param $longitude
      * @return string
      */
     public function movePlayer($latitude, $longitude)
@@ -170,4 +181,64 @@ class Map
     {
         return isset($this->occupants[$x][$y]);
     }
+
+    /**
+     * @return string
+     */
+    public function moveZombies()
+    {
+        foreach ($this->getFields() as $field) {
+            if ($field->getOccupant() instanceof Zombie) {
+                $x = $this->getRandomMovement($field->getXAxis(), $this->xSize);
+                $y = $this->getRandomMovement($field->getYAxis(), $this->ySize);
+                if ($this->hasOccupant($x, $y)) {
+                    //check if player
+                    if ($this->getOccupant($x, $y) instanceof Player) {
+                        return Game::STATE_LOST;
+                    }
+                    continue;
+                }
+                $zombie = $field->getOccupant();
+                $field->setOccupant(null);
+                unset($this->occupants[$field->getXAxis()][$field->getYAxis()]);
+                $this->occupants[$x][$y] = $zombie;
+                $this->placeOccupantOnField($x, $y, $zombie);
+            }
+        }
+        return Game::STATE_ACTIVE;
+    }
+
+    /**
+     * @param int $coordinate
+     * @param int $max
+     * @return int
+     */
+    private function getRandomMovement($coordinate, $max)
+    {
+        $newCoordinate = $coordinate + rand(-1,1);
+        if ($newCoordinate < 0 || $newCoordinate > $max) {
+            return $coordinate;
+        }
+        return $newCoordinate;
+    }
+
+    /**
+     * @param int $x
+     * @param int $y
+     * @param OccupantInterface $occupant
+     */
+    private function placeOccupantOnField($x, $y, OccupantInterface $occupant)
+    {
+        foreach ($this->getFields() as $field) {
+            if ($field->getXAxis() === $x && $field->getYAxis() === $y) {
+                if($field->getOccupant()) {
+                    return;
+                }
+                $field->setOccupant($occupant);
+                return;
+            }
+        }
+    }
+
+
 }
