@@ -20,6 +20,9 @@ export default class Maps extends React.Component {
     )
   }
   render() {
+    const mapOptions = {
+      // mapTypeId: 'SATELLITE'
+    }
     return (
        <GoogleMap
          bootstrapURLKeys={{
@@ -27,7 +30,8 @@ export default class Maps extends React.Component {
            language: 'nl'
          }}
         center={this.props.location}
-        defaultZoom={this.props.zoom}>
+        defaultZoom={this.props.zoom}
+        options={mapOptions}>
         {this.renderPlayer()}
         {this.props.objects.map(this.renderNonHumanObjects)}
 

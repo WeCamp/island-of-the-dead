@@ -2,6 +2,9 @@ import React from "react";
 import Col from 'react-bootstrap';
 import Row from 'react-bootstrap';
 import Maps from './Maps.jsx';
+const API_URL = 'http://island-of-the-dead.stevendevries.nl';
+// LOCAL IP
+//const API URL = 'http://islandofthedead.com';
 
 export default class Game extends React.Component {
   constructor(props) {
@@ -30,7 +33,7 @@ export default class Game extends React.Component {
 
     var myInit = { method: 'POST',
              body: formData };
-    fetch('http://islandofthedead.com/game/start', myInit)
+    fetch(`${API_URL}/game/start`, myInit)
       .then(function(response) {
         return response.json();
       })
@@ -55,7 +58,7 @@ export default class Game extends React.Component {
       var myInit = { method: 'POST',
                body: formData };
 
-      fetch(`http://islandofthedead.com/player/move/${this.state.gameId}`, myInit)
+      fetch(`${API_URL}/player/move/${this.state.gameId}`, myInit)
         .then(function(response) {
           console.log("fetching data from backend");
           return response.json();
@@ -87,7 +90,20 @@ export default class Game extends React.Component {
         </div>
       );
     }
-
+    if (this.state.status === 'LOST') {
+      return (
+        <div>
+          Game Lost ...
+        </div>
+      );
+    }
+    if (this.state.status === 'WON') {
+      return (
+        <div>
+          Game Won ...
+        </div>
+      );
+    }
     const coordinates = {lat: this.state.latitude, lng: this.state.longitude}
     return (
       <div className="maps-component">
