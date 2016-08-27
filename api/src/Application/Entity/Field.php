@@ -7,9 +7,9 @@ use Application\Interfaces\OccupantInterface;
 class Field
 {
     const X_MIN = 1;
-    const X_MAX = 27;
+    const X_MAX = 54;
     const Y_MIN = 1;
-    const Y_MAX = 24;
+    const Y_MAX = 48;
 
     const LON_MIN = 5.632183;
     const LON_MAX = 5.63589;

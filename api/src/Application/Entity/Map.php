@@ -148,7 +148,7 @@ class Map
      */
     private function addOccupant($x, $y, $occupant)
     {
-        $this->occupants[$x][$y] = $occupant;
+        $this->occupants[$x * 2][$y * 2] = $occupant;
     }
 
     /**
