@@ -34,6 +34,6 @@ export default class ObserverMap extends React.Component {
 
 ObserverMap.defaultProps = {
   objects: null,
-  location: {lat: 52.373486, lng: 5.637864},
-  zoom: 19,
+  location: {lat: 52.372339, lng: 5.635107},
+  zoom: 17,
 };

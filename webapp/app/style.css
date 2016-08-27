@@ -32,3 +32,27 @@
   background-image: url("/exit.png");
   background-size: 30px;
 }
+
+.menu {
+  width: 100%;
+  height: 100vh;
+}
+
+.title {
+  text-align: center;
+}
+
+.menu .text {
+  text-align: center;
+}
+
+.menu .button-area {
+  margin: 10px;
+  text-align: center;
+  height: 100%;
+  background-image: url("/menu.jpg");
+}
+
+.menu .button-area .button {
+  margin: 10px;
+}

@@ -3,6 +3,7 @@ import {Col, Row, Button} from 'react-bootstrap';
 
 import Game from './Game.jsx';
 import ObserverMode from './ObserverMode.jsx'
+import Title from './Title.jsx';
 
 export default class App extends React.Component {
   constructor(props) {
@@ -30,7 +31,8 @@ export default class App extends React.Component {
   render() {
     if (this.state.observerMode) {
       return (
-        <div>
+        <div classname="game">
+          <Title title="Island of the Dead" subtitle=" - by Team Lost"/>
           <ObserverMode />
         </div>
       );
@@ -43,14 +45,19 @@ export default class App extends React.Component {
       );
     }
     return (
-      <div>
-      Pick your mode ...
-        <Row>
-          <Col xs={6} md={6}>
-            <Button onClick={this.startGameMode}>Game Mode</Button>
+      <div className="menu">
+        <Title title="Island of the Dead" subtitle=" - by Team Lost"/>
+        <Row className="text">
+          <Col xs={12} md={12} lg={12}>
+            <marquee>Pick your mode ...</marquee>
           </Col>
-          <Col xs={6} md={6}>
-            <Button onClick={this.startObserverMode}>Observer Mode</Button>
+        </Row>
+        <Row className="button-area">
+          <Col xs={12} md={6} lg={6}>
+            <Button className="button" onClick={this.startGameMode}>Game Mode</Button>
+          </Col>
+          <Col xs={12} md={6} lg={6}>
+            <Button className="button" onClick={this.startObserverMode}>Observer Mode</Button>
           </Col>
         </Row>
       </div>
