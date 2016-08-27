@@ -31,7 +31,7 @@ export default class App extends React.Component {
   render() {
     if (this.state.observerMode) {
       return (
-        <div classname="game">
+        <div className="game">
           <Title title="Observer Mode" subtitle=""/>
           <ObserverMode />
         </div>
