@@ -32,7 +32,7 @@ export default class App extends React.Component {
     if (this.state.observerMode) {
       return (
         <div classname="game">
-          <Title title="Island of the Dead" subtitle=" - by Team Lost"/>
+          <Title title="Observer Mode" subtitle=""/>
           <ObserverMode />
         </div>
       );

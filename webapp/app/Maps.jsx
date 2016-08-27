@@ -1,6 +1,8 @@
 import React from 'react';
 import Occupant from './mapObjects/Occupant.jsx';
 import GoogleMap from 'google-map-react';
+import mapOptionsObject from './mapOptions.js';
+
 const API_KEY = 'AIzaSyC2CY6tmBR88gS6cw_v6hf7JM2CSKz6ZgA';
 
 export default class Maps extends React.Component {
@@ -20,9 +22,8 @@ export default class Maps extends React.Component {
     )
   }
   render() {
-    const mapOptions = {
-      // mapTypeId: 'SATELLITE'
-    }
+
+    const mapOptions = mapOptionsObject;
     return (
        <GoogleMap
          bootstrapURLKeys={{

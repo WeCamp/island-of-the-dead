@@ -51,22 +51,24 @@ export default class ObserverMode extends React.Component {
     {this.displayStateInConsole()}
     if (this.state.status === null) {
       return(
-        <div className="game-loading">
+        <div className="maps-component">
           Game Loading ...
         </div>
       );
     }
     if (this.state.status === 'LOST') {
       return (
-        <div className="game-lost">
+        <div className="maps-component">
           Game Lost By Player...
+          <ObserverMap objects={this.state.objectsInGame} />
         </div>
       );
     }
     if (this.state.status === 'WON') {
       return (
-        <div className="game-won">
+        <div className="maps-component">
           Game Won By Player...
+          <ObserverMap objects={this.state.objectsInGame} />
         </div>
       );
     }

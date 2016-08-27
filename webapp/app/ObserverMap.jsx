@@ -1,6 +1,8 @@
 import React from 'react';
 import Occupant from './mapObjects/Occupant.jsx';
 import GoogleMap from 'google-map-react';
+import mapOptionsObject from './mapOptions.js';
+
 const API_KEY = 'AIzaSyC2CY6tmBR88gS6cw_v6hf7JM2CSKz6ZgA';
 
 export default class ObserverMap extends React.Component {
@@ -16,6 +18,7 @@ export default class ObserverMap extends React.Component {
     );
   }
   render() {
+    const mapOptions = mapOptionsObject;
 
     return (
        <GoogleMap
@@ -24,7 +27,8 @@ export default class ObserverMap extends React.Component {
            language: 'nl'
          }}
         center={this.props.location}
-        defaultZoom={this.props.zoom}>
+        defaultZoom={this.props.zoom}
+        options={mapOptions}>
         {this.props.objects.map(this.renderObjects)}
 
       </GoogleMap>
