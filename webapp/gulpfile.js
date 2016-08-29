@@ -10,7 +10,8 @@ const config = {
   destination_folder: "build",
   jsx_src: ["*.js", "app/**/*.js", "app/**/*.jsx"],
   images_gif: "app/*.gif",
-  images_png: "app/*.png"
+  images_png: "app/*.png",
+  images_jpg: "app/*.jpg",
 }
 gulp.task("bundle", function () {
     return browserify({
@@ -23,7 +24,7 @@ gulp.task("bundle", function () {
 });
 
 gulp.task("copy", ["bundle"], function () {
-    return gulp.src([config.html_src, config.styles_src, config.images_gif, config.images_png])
+    return gulp.src([config.html_src, config.styles_src, config.images_gif, config.images_png, config.images_jpg])
         .pipe(gulp.dest(config.destination_folder));
 });
 

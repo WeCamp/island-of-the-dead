@@ -1,13 +1,17 @@
 import React from 'react';
-// import classnames from 'classnames';
 
 export default class Occupant extends React.Component {
+
   render() {
-    // const cn = classnames({
-    //   [`${this.props.type}`]: true,
-    // });
+    var rotation = Math.round(Math.random()*360);
+    if (this.props.type !== 'Exit') {
+      var styles = {
+        "transform": `rotate(${rotation}deg)`,
+      }
+    }
+    
     return (
-       <div key={this.props.index} className={this.props.type}>
+       <div key={this.props.index} className={this.props.type} style={styles}>
 
        </div>
     );
