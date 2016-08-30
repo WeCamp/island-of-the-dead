@@ -1,5 +1,15 @@
 [![Stories in Ready](https://badge.waffle.io/WeCamp/island-of-the-dead.png?label=ready&title=Ready)](https://waffle.io/WeCamp/island-of-the-dead)
-# team-jasper
+# Island of the Dead
+
+Made by: **Team Lost**
+
+* [Jen Cockerill](https://twitter.com/jencockers)
+* [Joralf Quist](https://twitter.com/Koekenbakker28)
+* [Martin Westra](https://twitter.com/diewom)
+* [Rob Stocker](https://twitter.com/Techbot)
+* [Steven de Vries](https://twitter.com/Stedv)
+
+**Honourable mention to our WeCamp coach: [Jasper N. Brouwer](https://twitter.com/jaspernbrouwer)**
 
 ## FrontEnd Application (webapp) ##
 
