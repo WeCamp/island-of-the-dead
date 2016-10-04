@@ -1,6 +1,8 @@
 - name: Add key for NodeJS repository
   sudo: yes
-  apt_key: url=https://deb.nodesource.com/gpgkey/nodesource.gpg.key state=present
+  apt_key: url=https://keyserver.ubuntu.com/pks/lookup?op=get&fingerprint=on&search=0x1655A0AB68576280
+  state: present
+  id: "68576280"
 
 - name: Add repository for NodeJS
   sudo: yes
