@@ -135,10 +135,12 @@ class Map
         $this->addOccupant(7, 17, new Zombie());
         $this->addOccupant(7, 18, new Zombie());
         $this->addOccupant(7, 19, new Zombie());
-        $this->addOccupant(12, 11, new Zombie());
+//        $this->addOccupant(12, 11, new Zombie());
         $this->addOccupant(10, 13, new Zombie());
         $this->addOccupant(9, 15, new Zombie());
         $this->addOccupant(14, 16, new Zombie());
+
+        $this->addOccupant(4, 23, new Zombie());
     }
 
     /**
@@ -148,7 +150,7 @@ class Map
      */
     private function addOccupant($x, $y, $occupant)
     {
-        $this->occupants[$x][$y] = $occupant;
+        $this->occupants[$x * 2][$y * 2] = $occupant;
     }
 
     /**
